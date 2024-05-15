@@ -61,3 +61,30 @@ printf(“Enter Input”);
 yylex();
 printf(“%d%d”,v,c);
 }
+
+
+
+
+
+Implementation of scanner by specifying Regular Expressions.
+%{
+#include <stdio.h>
+%}
+// Regular expressions for tokens
+DIGIT [0-9]
+INTEGER {DIGIT}+
+FLOAT ({DIGIT}+\.|{DIGIT}*\.{DIGIT}+)([Ee][+-]?{DIGIT}+)?
+IDENTIFIER [a-zA-Z][a-zA-Z0-9]*
+OPERATOR [-+*/=]
+%%
+{INTEGER} { printf("INTEGER: %s\n", yytext); }
+{FLOAT} { printf("FLOAT: %s\n", yytext); }
+{IDENTIFIER} { printf("IDENTIFIER: %s\n", yytext); }
+{OPERATOR} { printf("OPERATOR: %s\n", yytext); }
+[ \t\n] ; // Ignore whitespace characters
+. { printf("ERROR: Invalid token: %s\n", yytext); }
+%%
+int main() {
+yylex();
+return 0;
+}
