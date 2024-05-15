@@ -1,0 +1,63 @@
+Sure! Here's a simple example of a Flex program that counts the number of words in the
+input:
+Flex
+%{
+#include <stdio.h>
+int wordCount = 0;
+%}
+%%
+[a-zA-Z]+ { wordCount++; }
+. {}
+%%
+int main() {
+printf(“Enter Text”);
+yylex();
+printf("Number of words: %d\n", wordCount);
+return 0;
+}
+
+
+
+
+Example 1: Count the number of characters in a string
+%{
+int count = 0;
+%}
+%%
+[A-Z] {printf(&quot;%s capital letter\n&quot;, yytext);
+count++;}
+. {printf(&quot;%s not a capital letter\n&quot;, yytext);}
+\n {return 0;}
+%%
+int yywrap(){}
+int main(){
+yylex();
+printf(&quot;\nNumber of Capital letters &quot;
+&quot;in the given input - %d\n&quot;, count);
+return 0;
+}
+
+
+
+
+
+Count the number of characters in a string
+%{ #include&lt;stdio.h&gt;
+int v=0;
+int c=0;
+}
+%
+%%
+{aeiou AEIOU} {v++;}
+{a-z A-Z} {c++;}
+%%
+int yywrap()
+{
+return 1;
+}
+main()
+{
+printf(“Enter Input”);
+yylex();
+printf(“%d%d”,v,c);
+}
