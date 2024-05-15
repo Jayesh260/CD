@@ -1,0 +1,63 @@
+%{
+#include <stdio.h>
+%}
+
+/* Regular Definitions */
+DIGIT [0-9]
+INTEGER {DIGIT}+
+IDENTIFIER [a-zA-Z][a-zA-Z0-9]*
+WS [ \t\n]+
+
+%%
+
+"integer"    { printf("Keyword: %s\n", yytext); }
+"read"       { printf("Keyword: %s\n", yytext); }
+"display"    { printf("Keyword: %s\n", yytext); }
+"if"         { printf("Keyword: %s\n", yytext); }
+"else"       { printf("Keyword: %s\n", yytext); }
+"then"       { printf("Keyword: %s\n", yytext); }
+"while"      { printf("Keyword: %s\n", yytext); }
+"for"        { printf("Keyword: %s\n", yytext); }
+"to"         { printf("Keyword: %s\n", yytext); }
+"step"       { printf("Keyword: %s\n", yytext); }
+
+"<="         { printf("Relational Operator: %s\n", yytext); }
+"<"          { printf("Relational Operator: %s\n", yytext); }
+">="         { printf("Relational Operator: %s\n", yytext); }
+">"          { printf("Relational Operator: %s\n", yytext); }
+"=="         { printf("Relational Operator: %s\n", yytext); }
+"#"          { printf("Relational Operator: %s\n", yytext); }
+
+"+"          { printf("Arithmetic Operator: %s\n", yytext); }
+"-"          { printf("Arithmetic Operator: %s\n", yytext); }
+"*"          { printf("Arithmetic Operator: %s\n", yytext); }
+"/"          { printf("Arithmetic Operator: %s\n", yytext); }
+
+"++"         { printf("Increment Operator: %s\n", yytext); }
+"--"         { printf("Decrement Operator: %s\n", yytext); }
+
+"="          { printf("Assignment Operator: %s\n", yytext); }
+
+"("          { printf("Special Symbol: %s\n", yytext); }
+")"          { printf("Special Symbol: %s\n", yytext); }
+"{"          { printf("Special Symbol: %s\n", yytext); }
+"}"          { printf("Special Symbol: %s\n", yytext); }
+","          { printf("Special Symbol: %s\n", yytext); }
+";"          { printf("Special Symbol: %s\n", yytext); }
+
+{INTEGER}    { printf("Number: %s\n", yytext); }
+{IDENTIFIER} { printf("Identifier: %s\n", yytext); }
+
+{WS}         {/* ignore whitespace */}
+.            {/* ignore other characters */}
+
+%%
+
+int yywrap(void) {
+    return 1;
+}
+
+int main() {
+    yylex();
+    return 0;
+}
